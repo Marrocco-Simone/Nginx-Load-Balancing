@@ -24,8 +24,8 @@ app.get('/adress',(req,res) => {
     res.status(200).send({url,port});
 })
 
-app.get('/',(req,res) => {
-    res.send('gffff');
+app.get('/load/:n',(req,res) => {
+    res.send(req.params.n);
 })
 
 app.listen(port, url, () => {
