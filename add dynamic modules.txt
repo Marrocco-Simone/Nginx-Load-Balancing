@@ -1,0 +1,22 @@
+Go to http://nginx.org/en/download.html and donwload the stable version, then extract the tar.gz file
+
+Inside the extracted folder, too see the list of modules type
+    ./configure --help
+Or, if you want only the dynamic ones, type
+    ./configure --help | grep dynamic
+
+You'll get a list of all the modules, written like "--module-name"
+
+To install them (and whole nginx again), use ./configure with this parameters
+    ./configure     --sbin-path=/usr/bin/nginx
+                    --conf-path=/etc/nginx/nginx.conf
+                    --error-log-path=/var/log/nginx/error.log
+                    --http-log-path=/var/log/nginx/access.log
+                    --with-pcre
+                    --pid-path=/var/run/nginx.pid
+                    ////here paste the modules you want, like --module-name
+                    --modules-path=/etc/nginx/modules
+
+Example of command
+    ./configure --sbin-path=/usr/bin/nginx --conf-path=/etc/nginx/nginx.conf --error-log-path=/var/log/nginx/error.log --http-log-path=/var/log/nginx/access.log --with-pcre --pid-path=/var/run/nginx.pid --with-http_ssl_module --with_http_image_filter=dynamic --modules-path=/etc/nginx/modules
+
