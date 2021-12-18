@@ -14,7 +14,7 @@ setAdress().then(() => {
 const app = express();
 
 const printRequest = (req,res,next) => {
-    console.log(`${url}:${port} received ${req.path}`);
+    console.log(`${url}:${port} received ${req.path} at ${Date.now()}`);
     next();
 }
 app.use(printRequest);
@@ -25,7 +25,13 @@ app.get('/adress',(req,res) => {
 })
 
 app.get('/load/:n',(req,res) => {
-    res.send(req.params.n);
+    setTimeout(() => {
+        res.send({url,port});
+    },req.params.n*1000);
+})
+
+app.get('*', (req,res) => {
+    res.status(404).send('<h1>Express - Page not found </h1>');
 })
 
 app.listen(port, url, () => {

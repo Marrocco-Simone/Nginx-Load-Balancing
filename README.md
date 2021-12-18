@@ -9,7 +9,6 @@ It copies the local nginx.conf file in the /etc/nginx folder, then it tests and 
 
 ## launch-servers.sh
 It launches different copies of the express server in different ports, so that you can test them via the nginx upstream
-It does not manage to launch the servers if node is used, but it works with nodemon
 
 ## express server
 The public folder does not load if you dont start the server from the express folder, so to launch use first ```cd express```
