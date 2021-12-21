@@ -1,7 +1,7 @@
 cd express;
 
 start=2000
-end=5000
+end=3000
 
 port=$start
 url='127.0.0.1'

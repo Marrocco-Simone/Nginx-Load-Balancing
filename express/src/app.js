@@ -25,9 +25,14 @@ app.get('/adress',(req,res) => {
 })
 
 app.get('/load/:n',(req,res) => {
-    setTimeout(() => {
+    /* setTimeout(() => {
         res.send({url,port});
-    },req.params.n*1000);
+    },req.params.n*1000); */
+    let a;
+    for(let i=0; i<req.params.n*100000000; i++){
+        a=i;
+    }
+    res.send();
 })
 
 app.get('*', (req,res) => {
