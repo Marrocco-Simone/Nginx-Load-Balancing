@@ -14,7 +14,7 @@ setAdress().then(() => {
 const app = express();
 
 const printRequest = (req,res,next) => {
-    console.log(`${url}:${port} received ${req.path} at ${Date.now()}`);
+    console.log(`${url}:${port} received ${req.path} by ${req.headers['x-forwarded-for']} | ${req.ip}`);
     next();
 }
 app.use(printRequest);
