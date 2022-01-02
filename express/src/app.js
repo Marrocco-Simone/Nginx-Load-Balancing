@@ -14,7 +14,7 @@ setAdress().then(() => {
 const app = express();
 
 const printRequest = (req,res,next) => {
-    console.log(`${url}:${port} received ${req.path} by ${req.headers['x-forwarded-for']} | ${req.ip}`);
+    console.log(`${url}:${port} received ${req.path}`);
     next();
 }
 app.use(printRequest);
@@ -33,6 +33,20 @@ app.get('/load/:n',(req,res) => {
         a=i;
     }
     res.send();
+})
+
+app.get('/login', (req,res) => {
+    res.json({ token: 'secret-token' });
+})
+
+const loginMW = (req,res,next) => {
+    const token = req.headers.authorization;
+    if(token != 'secret-token') res.status(403).send('Not logged in');
+    else next();
+}
+
+app.get('/secret', loginMW, (req,res) => {
+    res.send('welcome to the secret page');
 })
 
 app.get('*', (req,res) => {
