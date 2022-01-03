@@ -24,7 +24,7 @@ class LoadPage(HttpUser):
     def slow_page(self):
         self.client.get(url="/load/2")
 
-class LoggedUser(HttpUser):
+"""class LoggedUser(HttpUser):
     #initialize variable token
     def __init__(self, parent):
         super(LoggedUser, self).__init__(parent)
@@ -39,7 +39,7 @@ class LoggedUser(HttpUser):
 
     @task
     def secret_page(self):
-        self.client.get(url="/secret",headers={"authorization": self.token})
+        self.client.get(url="/secret",headers={"authorization": self.token}) """
 
     #def on_start(self):
     #    self.client.post("/login", json={"username":"foo", "password":"bar"})

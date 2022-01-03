@@ -14,7 +14,7 @@ setAdress().then(() => {
 const app = express();
 
 const printRequest = (req,res,next) => {
-    console.log(`${url}:${port} received ${req.path}`);
+    console.log(`${url}:${port} received ${req.path} from ${req.ip}`);
     next();
 }
 app.use(printRequest);

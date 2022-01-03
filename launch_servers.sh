@@ -1,5 +1,5 @@
 #how many servers
-n=7
+n=4
 
 ######
 
