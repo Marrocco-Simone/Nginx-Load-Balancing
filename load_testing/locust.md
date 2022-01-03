@@ -43,7 +43,5 @@ Here we specify what to send. We can use different requestes, like ```get``` or 
 ```def on_start(self):```
 This is a function executed only at the start of a new user before he starts launching tasks, useful to declare new variables to use inside the code or to make a login and receive an authorization code to use later
 
-
-
-
-
+## docs
+Documentation on http://docs.locust.io/en/stable/what-is-locust.html
