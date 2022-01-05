@@ -1,7 +1,9 @@
 # locust for load testing
 
 ## installation
-'''pip install locust'''
+```
+pip install locust
+```
 
 ## usage of locust programm
 ```locust -f locust.py``` : -f for the location of the python file.
