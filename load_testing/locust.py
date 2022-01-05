@@ -32,13 +32,11 @@ class LoggedUser(HttpUser):
         self.token = ""
         with self.client.get(url="/login") as response:
             self.token = response.json()["token"]
+    #    self.client.post("/login", json={"username":"foo", "password":"bar"})
 
     @task
     def secret_page(self):
         self.client.get(url="/secret",headers={"authorization": self.token})
-
-    #def on_start(self):
-    #    self.client.post("/login", json={"username":"foo", "password":"bar"})
 
     #@task
     #def view_items(self):
