@@ -52,5 +52,10 @@ It is used to tell the user what to do. We can also create multiple tasks inside
 
 Here we specify what to send. We can use different requestes, like ```get``` or ```post```, and we can send much more than just the url, for example ```"url=/login", json={"username":"foo", "password":"bar"}, headers={"authorization": token}``` to send something else in the request
 
+## web UI
+
+//TODO
+//WHAT IS 95% PERCENTILE?
+
 ## docs
 Documentation on http://docs.locust.io/en/stable/what-is-locust.html
