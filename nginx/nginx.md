@@ -14,7 +14,7 @@ The main config file will be located in ```/etc/nginx/nginx.conf```
 - ```sudo nginx -s reload```  
     to reload and load the changes on the server
 
->It is adviced to use a local easy-to-access nginx.conf file and then use a simple script that copies it in the correct location (using ```cp path/to/local/nginx.conf /etc/nginx/nginx.conf```), compiles, and reload
+>It is adviced to use a local easy-to-access nginx.conf file and then use a simple script (file ***.sh***) that copies it in the correct location (using ```cp path/to/local/nginx.conf /etc/nginx/nginx.conf```), compiles, and reload
 
 ## nginx.conf
 In nginx, we use functions defined with curly braces, called **contexts**. We can see the entire file as the ```main{}``` context. All the other lines require ```;``` at the end. This is what we need to write inside it:
@@ -167,3 +167,49 @@ server {
 - ```try_files $uri /error_page;```  
     similar to the error page of the reverse proxy, if nginx doesn't find the file with path **$uri** redirects to an error_page.
     > **$uri** is a nginx global variable which contains the requested url
+
+## Example of nginx.conf file
+```
+worker_processes 2;
+
+events {
+	worker_connections 1024;
+}
+
+http {
+	keepalive_requests 100;
+	keepalive_timeout 75s;
+
+	upstream my_servers {
+		server localhost:3000 weight=2;
+		server 10.10.10.156:3123;
+        server localhost:5000 backup;
+	}
+
+	server {
+		listen 80;
+		server_name 0.0.0.0;
+
+		location / {
+			proxy_pass http://my_servers;
+
+			proxy_set_header X-Real-IP $remote_addr;
+			proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+			proxy_intercept_errors on;
+			error_page 502 /servers_down;
+		}
+
+		location /servers_down {
+			return 502 "nginx - servers are in mantainance";
+        }
+
+		location ~* \.(css|js|jpg|png)$ {
+			expires 30s;
+			add_header Cache-Control "public";
+			
+			proxy_pass http://my_servers;
+		}
+	}
+}
+```

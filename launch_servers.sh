@@ -1,3 +1,6 @@
+#for some strange reason, this variable is set as {:1.105} instead of {:1.225}. this reset the variable
+unset GNOME_TERMINAL_SERVICE
+
 #how many servers
 n=4
 
