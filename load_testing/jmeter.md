@@ -3,7 +3,6 @@
 ## Installation
 Go [here](https://jmeter.apache.org/download_jmeter.cgi) to download the latest JMeter version. 
 You can extract the downloaded file via command ```tar zxvf apache-jmeter-5.4.3.tgz``` and rename it as you like.  
-```sudo apt install jmeter```
 > Be sure to have JDK installer with ```sudo apt install default-jdk```
 
 > Unfortunately, ```sudo apt install jmeter``` installs an older version
@@ -29,7 +28,7 @@ To launch in Graphic User Interface mode, don't add any parameter
 
 Launch with ```./jmeter -n```  
 We have different parameters to use:  
-- ```-t /path/to/test_plan.jmx```: the test plan file
+- ```-t /path/to/test_plan.jmx```: the test plan file created in the GUI mode
 - ```-l /path/to/log.csv```: the log file (in the csv format, useful for an excel file)
 - ```-e -o /path/to/report_folder``` to download the result in a folder. By opening the ***index.html*** file inside, we can get a nice report of the testing
     > Remember to delete the folder and the ***log.csv*** file before starting a new test, or it will fail. Of course, you could instead insert new paths
@@ -38,6 +37,6 @@ We have different parameters to use:
 
 [Docs](https://jmeter.apache.org/usermanual/get-started.html)
 
-- [GUI](https://youtu.be/mXGcBvWYl-U)  
-- [CLI](https://youtu.be/tTgyrSWlj5s) 
-- [Rest API](https://youtu.be/RrQx_tmUosY)
+- [GUI video](https://youtu.be/mXGcBvWYl-U)  
+- [CLI video](https://youtu.be/tTgyrSWlj5s) 
+- [Rest API video](https://youtu.be/RrQx_tmUosY)

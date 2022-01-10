@@ -1,6 +1,3 @@
-#for some strange reason, this variable is set as {:1.105} instead of {:1.225}. this reset the variable
-unset GNOME_TERMINAL_SERVICE
-
 #how many servers
 n=4
 
@@ -9,10 +6,8 @@ n=4
 cd express;
 
 n=$(($n-1))
-echo $n;
 start=2000
 end=$(($start + $(($n*1000))))
-echo $end
 
 port=$start
 url='127.0.0.1'

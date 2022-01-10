@@ -49,6 +49,10 @@ app.get('/secret', loginMW, (req,res) => {
     res.send('welcome to the secret page');
 })
 
+app.get('/fail', (req,res) => {
+    //res.status(503).send('<h1>Simulation server not responding</h1>');
+})
+
 app.get('*', (req,res) => {
     res.status(404).send('<h1>Express - Page not found </h1>');
 })

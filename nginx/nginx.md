@@ -60,6 +60,8 @@ First we need to select the algorithm used to distribute the load between the se
     indicates a single server where to redirect some load. Write more than one to have a list of servers.
 
 > We can also add some options for better customization
+> - ```server url:port fail_timeout=3 max_fails=2;```  
+		we can manually decide how much to wait before considering the request unresponsed and how many fails to accept before considering the server down. Low numbers can make up for not having active health checks, but slow-to-load pages or heavy loaded servers could be considered wrongly down
 > - ```server url:port weight=3;```  
     this server will receive thrice the load as other servers with weight=1 (the default value)
 > - ```server url:port backup;```  
@@ -130,13 +132,21 @@ location ~* \.png$ {
     > Examples of durations are **2d** (2 days),**1m** (1 month), **30s** (30 seconds), **5h** (5 hours)
 
 ### Health checks (aka prob)
-active healt check - 5 testes, down if 2 fails (Nginx Plus) - tested on url:port/test_up
+
+In Nginx Open Source we have passive health checks: if one of our upstream servers is down, the traffic is redirected to another one. To check if it is back online, Nginx tries to redirect some traffic and see if the server responds again. Of course, this means lower throughput.  
+In Nginx Plus we have active checks: Nginx periodically sends requests to the servers and check if they are online, while the user does not suffer for the "check if the server is up again" debuff. 
+For the Plus version, we need to declare a **match context** in **http**, where we declare what the output should be.  
+```
+match im_ok { 
+	status=200; 
+	header Content-Type = text/html; 
+	body ~ "I'm ok!";}
+```
+After that, we can add a location used specifically for the health check. Here, we are saying to do five tests and consider the server down if two fails.
 ```
 location = /test_up {
 	healt_check interval=2s fails=2 passes=5 uri=/test_up match=im_ok;
 }
-
-match im_ok { status=200; header Content-Type = text/html; body ~ "I'm ok!";}
 ```
 
 ### Nginx as static server
