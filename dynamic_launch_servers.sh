@@ -1,6 +1,6 @@
 #how many servers
 n=3
-loc="/etc/nginx/server_list.conf";
+loc="/etc/nginx/upstream.conf";
 
 ######
 
@@ -16,13 +16,15 @@ url='127.0.0.1'
 #empty file with list of nginx servers
 > $loc;
 
+printf "upstream my_servers {\n" >> $loc;
+
 while [ $port -le $end ]
 do
     #start server
     gnome-terminal -- node src/app --url=$url --port=$port;
 
     #add server to the nginx list
-    printf "server $url:$port;\n" >> $loc;
+    printf "\tserver $url:$port;\n" >> $loc;
     
     #sleep 1;
     ####see connection
@@ -32,6 +34,8 @@ do
 
     port=$(( port+1000 ));
 done
+
+printf "}" >> $loc;
 
 #restart nginx to update the server list
 sudo nginx -t;

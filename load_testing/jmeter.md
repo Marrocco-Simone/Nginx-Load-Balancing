@@ -2,14 +2,14 @@
 
 ## Installation
 Go [here](https://jmeter.apache.org/download_jmeter.cgi) to download the latest JMeter version. 
-You can extract the downloaded file via command ```tar zxvf apache-jmeter-5.4.3.tgz``` and rename it as you like.  
-> Be sure to have JDK installer with ```sudo apt install default-jdk```
+You can extract the downloaded file via command `tar zxvf apache-jmeter-5.4.3.tgz` and rename it as you like.  
+> Be sure to have JDK installer with `sudo apt install default-jdk`
 
-> Unfortunately, ```sudo apt install jmeter``` installs an older version
+> Unfortunately, `sudo apt install jmeter` installs an older version
 
 ## Starting JMeter - GUI Mode
 
-Go to the folder ```bin``` inside the extracted folder and launch ```./jmeter```  
+Go to the folder `bin` inside the extracted folder and launch `./jmeter`  
 To launch in Graphic User Interface mode, don't add any parameter
 
 ## Graphic User Interface Mode
@@ -26,11 +26,11 @@ To launch in Graphic User Interface mode, don't add any parameter
 
 ## Command Line Interface Mode
 
-Launch with ```./jmeter -n```  
+Launch with `./jmeter -n`  
 We have different parameters to use:  
-- ```-t /path/to/test_plan.jmx```: the test plan file created in the GUI mode
-- ```-l /path/to/log.csv```: the log file (in the csv format, useful for an excel file)
-- ```-e -o /path/to/report_folder``` to download the result in a folder. By opening the ***index.html*** file inside, we can get a nice report of the testing
+- `-t /path/to/test_plan.jmx`: the test plan file created in the GUI mode
+- `-l /path/to/log.csv`: the log file (in the csv format, useful for an excel file)
+- `-e -o /path/to/report_folder` to download the result in a folder. By opening the ***index.html*** file inside, we can get a nice report of the testing
     > Remember to delete the folder and the ***log.csv*** file before starting a new test, or it will fail. Of course, you could instead insert new paths
 
 ## Docs and video tutorials used
