@@ -24,6 +24,7 @@ class LoadPage(HttpUser):
     def slow_page(self):
         self.client.get(url="/load/2")
 
+""" 
 class LoggedUser(HttpUser):
     wait_time = between(1,5)
 
@@ -42,4 +43,5 @@ class LoggedUser(HttpUser):
     #def view_items(self):
     #    for item_id in range(10):
     #        self.client.get(f"/item?id={item_id}", name="/item")
-    #        time.sleep(1)
+    #        time.sleep(1) 
+"""
