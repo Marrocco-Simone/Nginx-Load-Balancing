@@ -17,7 +17,7 @@ The main config file will be located in `/etc/nginx/nginx.conf`
 >It is adviced to use a local easy-to-access nginx.conf file and then use a simple script (file ***.sh***) that copies it in the correct location (using `cp path/to/local/nginx.conf /etc/nginx/nginx.conf`), compiles, and reload. However, you need to give permissions to access the folder, either using commands with `sudo` or by allowing operations via command `sudo chmod go+rwx /etc/nginx/`
 
 ## Example of nginx.conf file
-`
+```
 worker_processes 2;
 
 events {
@@ -59,8 +59,8 @@ http {
 			proxy_pass http://my_servers;
 		}
 	}
-}
-`
+}  
+```
 
 ## nginx.conf
 In nginx, we use functions defined with curly braces, called **contexts**. We can see the entire file as the `main{}` context. All the other lines require `;` at the end. This is what we need to write inside it:
@@ -129,7 +129,7 @@ Set up port and url of the nginx server
 > To create a context that serves only ***/page*** and not other subpages, use `location = /page {}`
 
 What we need to write inside `location` depends on what we want to do. For proxy passing, here an example of code:
-`
+```
 location / {
             proxy_pass http://my_servers;
 
@@ -139,7 +139,7 @@ location / {
 			proxy_intercept_errors on;
 			error_page 502 /servers_down;
 		}
-`
+```
 - `proxy_pass http://my_servers;`  
     redirects the request to our upstream context, which will select a server to respond.
     > Since we simply used `/` as location, upstream will receive everything: it will be like simply writing the original server url and port instead of the nginx ones in the browser
@@ -160,14 +160,14 @@ If we get an error 502 from the proxy_pass, we redirect to the nginx page ***/se
 ### Cache
 
 We can use a location context similar to this one to allow caching of files on the client side:
-`
+```
 location ~* \.png$ {
 			expires 30s;
 			add_header Cache-Control "public";
 			
 			proxy_pass http://my_servers;
 		}
-`
+```
 - `~* \.png$`  
     this is an expression that tells nginx to look if the request url ends with **.css**  . Since this will be a better match to the url, nginx will use it instead of the generic ***/***
     > If we want caching for multiple types of file, we can use   
@@ -261,3 +261,17 @@ git clone git@github.com:openresty/lua-nginx-module.git;
 ./configure --add-module=./nginx_upstream_check_module --add-module=./lua-nginx-module --add-module=./ngx_http_dyups_module;
 `
 ///PROBLEMI A RILEVARE LUA_NGINX_MODULE IN ./CONFIGURE. DOCUMENTAZIONE DEL MODULO DICE DI INSTALLARE DIRETTAMENTE [OPENRESTY](http://openresty.org/en/download.html)
+
+### OpenResty
+
+### Installation
+Execute this commands
+
+```
+sudo apt-get -y install --no-install-recommends wget gnupg ca-certificates;
+wget -O - https://openresty.org/package/pubkey.gpg | sudo apt-key add -;
+echo "deb http://openresty.org/package/ubuntu $(lsb_release -sc) main" \
+    | sudo tee /etc/apt/sources.list.d/openresty.list;
+sudo apt-get update;
+sudo apt-get -y install openresty;
+```

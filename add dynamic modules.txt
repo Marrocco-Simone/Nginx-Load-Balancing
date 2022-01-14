@@ -1,4 +1,5 @@
 Go to http://nginx.org/en/download.html and donwload the stable version, then extract the tar.gz file
+(Install here also the new modules from github)
 
 Inside the extracted folder, too see the list of modules type
     ./configure --help

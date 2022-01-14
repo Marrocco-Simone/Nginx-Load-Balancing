@@ -1,6 +1,6 @@
 #how many servers
-n=3
-loc="/etc/nginx/upstream.conf";
+n=10
+loc="/usr/local/openresty/nginx/conf/upstream.conf";
 
 ######
 
@@ -14,9 +14,9 @@ port=$start
 url='127.0.0.1'
 
 #empty file with list of nginx servers
-> $loc;
+sudo > $loc;
 
-printf "upstream my_servers {\n" >> $loc;
+sudo printf "upstream my_servers {\n" >> $loc;
 
 while [ $port -le $end ]
 do
@@ -24,7 +24,7 @@ do
     gnome-terminal -- node src/app --url=$url --port=$port;
 
     #add server to the nginx list
-    printf "\tserver $url:$port;\n" >> $loc;
+    sudo printf "\tserver $url:$port;\n" >> $loc;
     
     #sleep 1;
     ####see connection
@@ -35,7 +35,7 @@ do
     port=$(( port+1000 ));
 done
 
-printf "}" >> $loc;
+sudo printf "}" >> $loc;
 
 #restart nginx to update the server list
 sudo nginx -t;
